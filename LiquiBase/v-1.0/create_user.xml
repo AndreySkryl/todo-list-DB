@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="2016.02.18-001" author="Andrey_Skryl">
+		<comment>Создание пользователя 'Andrey_Skryl'@'localhost' с паролем '14233241'.</comment>
+		<sql>
+			CREATE USER IF NOT EXISTS 'Andrey_Skryl'@'localhost' IDENTIFIED BY '14233241';
+			GRANT ALL PRIVILEGES ON TODO_LIST.* TO 'Andrey_Skryl'@'localhost';
+			FLUSH PRIVILEGES;
+		</sql>
+		<rollback>
+			DROP USER IF EXISTS 'Andrey_Skryl'@'localhost';
+		</rollback>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="2016.02.18-020" author="Andrey_Skryl">
+		<comment>Создание уникального индекса на таблицу 'USER'(столбец: 'LOGIN').</comment>
+		<createIndex indexName="idx_LOGIN" tableName="USER" unique="true">
+			<column name="LOGIN" type="VARCHAR(32)"/>
+		</createIndex>
+	</changeSet>
+
+	<changeSet id="2016.02.18-021" author="Andrey_Skryl">
+		<comment>Создание не уникального индекса на таблицу 'TASK'(столбец: 'STATUS').</comment>
+		<createIndex indexName="idx_STATUS" tableName="TASK" unique="false">
+			<column name="STATUS" type="ENUM('Plan','Process','Done')"/>
+		</createIndex>
+	</changeSet>
+</databaseChangeLog>

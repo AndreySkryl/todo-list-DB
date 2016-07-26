@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+	<changeSet id="2016.02.18-022" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на добавление) в таблицу 'USER'.</comment>
+		<createProcedure>
+			CREATE TRIGGER USER_BEFORE_INSERT BEFORE INSERT ON USER
+			FOR EACH ROW
+			BEGIN
+				SET NEW.GUID = UUID();
+				SET NEW.PASSWORD = MD5(NEW.PASSWORD);
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER USER_BEFORE_INSERT;</rollback>
+	</changeSet>
+
+	<changeSet id="2016.02.18-023" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на обновление) в таблицу 'USER'.</comment>
+		<createProcedure>
+			CREATE TRIGGER USER_BEFORE_UPDATE BEFORE UPDATE ON USER
+			FOR EACH ROW
+			BEGIN
+				SET NEW.UPDATE_TIME = NOW();
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER USER_BEFORE_UPDATE;</rollback>
+	</changeSet>
+
+	<changeSet id="2016.02.18-024" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на обновление) в таблицу 'COLLEAGUE'.</comment>
+		<createProcedure>
+			CREATE TRIGGER COLLEAGUE_BEFORE_UPDATE BEFORE UPDATE ON COLLEAGUE
+			FOR EACH ROW
+			BEGIN
+				SET NEW.UPDATE_TIME = NOW();
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER COLLEAGUE_BEFORE_UPDATE;</rollback>
+	</changeSet>
+
+	<changeSet id="2016.02.18-025" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на добавление) в таблицу 'LIST_OF_TASKS'.</comment>
+		<createProcedure>
+			CREATE TRIGGER LIST_OF_TASKS_BEFORE_INSERT BEFORE INSERT ON LIST_OF_TASKS
+			FOR EACH ROW
+			BEGIN
+				SET NEW.GUID = UUID();
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER LIST_OF_TASKS_BEFORE_INSERT;</rollback>
+	</changeSet>
+
+	<changeSet id="2016.02.18-026" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на обновление) в таблицу 'LIST_OF_TASKS'.</comment>
+		<createProcedure>
+			CREATE TRIGGER LIST_OF_TASKS_BEFORE_UPDATE BEFORE UPDATE ON LIST_OF_TASKS
+			FOR EACH ROW
+			BEGIN
+				SET NEW.UPDATE_TIME = NOW();
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER LIST_OF_TASKS_BEFORE_UPDATE;</rollback>
+	</changeSet>
+
+	<changeSet id="2016.02.18-027" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на добавление) в таблицу 'TASK'.</comment>
+		<createProcedure>
+			CREATE TRIGGER TASK_BEFORE_INSERT BEFORE INSERT ON TASK
+			FOR EACH ROW
+			BEGIN
+				SET NEW.GUID = UUID();
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER TASK_BEFORE_INSERT;</rollback>
+	</changeSet>
+
+	<changeSet id="2016.02.18-028" author="Andrey_Skryl" runOnChange="true">
+		<comment>Создание триггера(на обновление) в таблицу 'TASK'.</comment>
+		<createProcedure>
+			CREATE TRIGGER TASK_BEFORE_UPDATE BEFORE UPDATE ON TASK
+			FOR EACH ROW
+			BEGIN
+				SET NEW.UPDATE_TIME = NOW();
+			END;
+		</createProcedure>
+		<rollback>DROP TRIGGER TASK_BEFORE_UPDATE;</rollback>
+	</changeSet>
+</databaseChangeLog>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+		<changeSet id="2016.02.18-009" author="Andrey_Skryl">
+			<comment>Создание первичного ключа в таблице 'USER' на столбец 'GUID'.</comment>
+			<addPrimaryKey tableName="USER" columnNames="GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-010" author="Andrey_Skryl">
+			<comment>Создание первичного ключа в таблице 'COLLEAGUE' на столбцы 'USER_GUID, COLLEAGUE_GUID'.</comment>
+			<addPrimaryKey tableName="COLLEAGUE" columnNames="USER_GUID, COLLEAGUE_GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-011" author="Andrey_Skryl">
+			<comment>Создание первичного ключа в таблице 'LIST_OF_TASKS' на столбцец 'GUID'.</comment>
+			<addPrimaryKey tableName="LIST_OF_TASKS" columnNames="GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-012" author="Andrey_Skryl">
+			<comment>Создание первичного ключа в таблице 'TASK' на столбцец 'GUID'.</comment>
+			<addPrimaryKey tableName="TASK" columnNames="GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-013" author="Andrey_Skryl">
+			<comment>Создание первичного ключа в таблице 'USER__LIST_OF_TASKS' на столбцы 'USER_GUID, LIST_OF_TASKS_GUID'.</comment>
+			<addPrimaryKey tableName="USER__LIST_OF_TASKS" columnNames="USER_GUID, LIST_OF_TASKS_GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-014" author="Andrey_Skryl">
+			<comment>Создание внешнего ключа в таблице 'COLLEAGUE' на столбец 'USER_GUID' и ссылающейся на таблицу 'USER'(cтолбец: 'GUID')</comment>
+			<addForeignKeyConstraint baseTableName="COLLEAGUE" baseColumnNames="USER_GUID"
+				constraintName="FK_COLLEAGUE__GUID_USER"
+				referencedTableName="USER" referencedColumnNames="GUID"/>
+		</changeSet>
+		<changeSet id="2016.02.18-015" author="Andrey_Skryl">
+			<comment>Создание внешнего ключа в таблице 'COLLEAGUE' на столбец 'COLLEAGUE_GUID' и ссылающейся на таблицу 'USER'(cтолбец: 'GUID')</comment>
+			<addForeignKeyConstraint baseTableName="COLLEAGUE" baseColumnNames="COLLEAGUE_GUID"
+				constraintName="FK_COLLEAGUE__GUID"
+				referencedTableName="USER" referencedColumnNames="GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-016" author="Andrey_Skryl">
+			<comment>Создание внешнего ключа в таблице 'LIST_OF_TASKS' на столбец 'USER_GUID' и ссылающейся на таблицу 'USER'(cтолбец: 'GUID')</comment>
+			<addForeignKeyConstraint baseTableName="LIST_OF_TASKS" baseColumnNames="USER_GUID"
+				constraintName="FK_LIST_OF_TASKS__USER_GUID"
+				referencedTableName="USER" referencedColumnNames="GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-017" author="Andrey_Skryl">
+			<comment>Создание внешнего ключа в таблице 'TASK' на столбец 'LIST_OF_TASKS_GUID' и ссылающейся на таблицу 'LIST_OF_TASKS'(cтолбец: 'GUID')</comment>
+			<addForeignKeyConstraint baseTableName="TASK" baseColumnNames="LIST_OF_TASKS_GUID"
+				constraintName="FK_TASK__LIST_OF_TASKS_GUID"
+				referencedTableName="LIST_OF_TASKS" referencedColumnNames="GUID"/>
+		</changeSet>
+
+		<changeSet id="2016.02.18-018" author="Andrey_Skryl">
+			<comment>Создание внешнего ключа в таблице 'USER__LIST_OF_TASKS' на столбец 'USER_GUID' и ссылающейся на таблицу 'USER'(cтолбец: 'GUID')</comment>
+			<addForeignKeyConstraint baseTableName="USER__LIST_OF_TASKS" baseColumnNames="USER_GUID"
+				constraintName="FK_USER__LIST_OF_TASKS__USER_GUID"
+				referencedTableName="USER" referencedColumnNames="GUID"/>
+		</changeSet>
+		<changeSet id="2016.02.18-019" author="Andrey_Skryl">
+			<comment>Создание внешнего ключа в таблице 'USER__LIST_OF_TASKS' на столбец 'LIST_OF_TASKS_GUID' и ссылающейся на таблицу 'LIST_OF_TASKS'(cтолбец: 'GUID')</comment>
+			<addForeignKeyConstraint baseTableName="USER__LIST_OF_TASKS" baseColumnNames="LIST_OF_TASKS_GUID"
+				constraintName="FK_USER__LIST_OF_TASKS__LIST_OF_TASKS_GUID"
+				referencedTableName="LIST_OF_TASKS" referencedColumnNames="GUID"/>
+		</changeSet>
+</databaseChangeLog>
