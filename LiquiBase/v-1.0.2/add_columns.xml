@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+		http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+	
+	<changeSet id="2016.08.29-001" author="Andrey_Skryl">
+		<comment>Добавление столбцов в таблицы 'LIST_OF_TASKS'.</comment>
+		<sql>
+			ALTER TABLE LIST_OF_TASKS 
+				ADD COUNT_OF_PLAN_TASKS INT NOT NULL DEFAULT 0,
+				ADD COUNT_OF_PROCESS_TASKS INT NOT NULL DEFAULT 0,
+				ADD COUNT_OF_DONE_TASKS INT NOT NULL DEFAULT 0
+		</sql>
+		<rollback>
+			ALTER TABLE LIST_OF_TASKS 
+				DROP COUNT_OF_PLAN_TASKS, 
+				DROP COUNT_OF_PROCESS_TASKS, 
+				DROP COUNT_OF_DONE_TASKS;
+		</rollback>
+	</changeSet>
+</databaseChangeLog>
